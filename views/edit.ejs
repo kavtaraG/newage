@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		const doEdit = async () => {
+			let id = document.getElementById('id').value;
+			let name = document.getElementById('name').value;
+			let mail = document.getElementById('mail').value;
+			let phoneNumber = document.getElementById('phoneNumber').value;
+			const data = { id, name, mail, phoneNumber };
+			const response = await fetch('/api/v1/data/'+id, {
+                method: 'PUT', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    //console.log('Success:', data);
+                    return data;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+				if(response.status == 'ok'){
+					return location = '/table';
+				};
+		}
+	</script>
+	<div id="contianer">
+		<input id="id" value="<%= data.id %>" readonly><br><br>
+		<input id="name" type="text" value="<%= data.name %>" placeholder="Name"><br><br>
+		<input id="mail" type="mail" value=" <%= data.mail %>" type="text" placeholder="Mail"><br><br>
+		<input id="phoneNumber" type="text" value="<%= data.phoneNumber %>" placeholder="Phone number"><br><br>
+		<input type="button" value="Edit" onclick="doEdit()">
+		<input type="button" value="Cancel" onclick="location='/table'">
+	</div>
+</body>
+</html>

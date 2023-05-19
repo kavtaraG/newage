@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <script>
+      const doSubmit = async () => {
+        let name = document.getElementById('name').value;
+        let mail = document.getElementById('mail').value;
+        let phoneNumber = document.getElementById('phone-number').value;
+        const data = { name, mail, phoneNumber };
+        const response = await fetch('/api/v1/data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    //console.log('Success:', data);
+                    return data;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+                if(response.status == 'ok'){
+                  return location = '/table';
+                };
+
+      }
+    </script>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div id="container">
+      <input id="name" type="text" value="" placeholder="Name"><br><br>
+      <input id="mail" type="text" value="" placeholder="Mail"><br><br>
+      <input id="phone-number" type="text" placeholder="Phone number"><br>
+      <span>max digits is 12</span><br><br>
+      <input id="btn1" type="button" value="Submit" onclick="doSubmit()">
+      <input id="btn2" type="button" value="Cancel" onclick="location='/'">
+    </div>
+
+  </body>
+</html>

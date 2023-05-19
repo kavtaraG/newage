@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <script>
+      const doEdit = (id)=>{
+        location = '/table/edit/'+id;
+      }
+      const doDelete = async (id) =>{
+        const response = await fetch('/api/v1/data/'+id, {
+          method: 'DELETE', // or 'PUT'
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({id}),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+         location = '/table';
+      }
+    </script>
+    <h1><%= title %></h1>
+    <button onclick="location='/'">Back</button> &nbsp;| &nbsp;
+    <br/><br/>
+
+    <div class="page-data">
+        <div class="data-table">
+           <table border="1" cellpadding="7" cellspacing="7">
+               <tr>
+                   <th width="20px">No</th>
+                   <th width="250px">Name</th>
+                   <th width="220px">Mail</th>
+                   <th width="100px">Phone number</th>
+                   <th>Edit</th>
+                   <th>Delete</th>
+               </tr>
+               <% if(data.length){for(var i = 0;i < data.length;i++) { %>       
+               <tr>
+                   <td><%=data[i]._id%></td>
+                   <td><%=data[i].name%></td>
+                   <td><%=data[i].mail%></td>
+                   <td><%=data[i].phoneNumber%></td>
+                   <td><button onclick="doEdit('<%=data[i]._id%>');" >Edit</button></td>
+                   <td><button onclick="doDelete('<%=data[i]._id %>');">Delete</button></td>
+               </tr>
+           <% }
+            }else{ %>
+                <tr>
+                   <td colspan="7">No data found</td>
+                </tr>
+           <% } %> 
+           </table>
+        </div>
+       </div>
+  </body>
+</html>

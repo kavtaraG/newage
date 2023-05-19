@@ -1,0 +1,22 @@
+## How to run: 
+# on macOS in terminal type follow the steps:
+  - cd choose folder
+  - npm i
+  - nodemon  
+
+## About database
+  - use Compass
+  - Database name is newage 
+  - Collection name: newages
+
+# About app
+  - App writen in Nodejs;
+  - Framework is ejs;
+  - Databese - Mongodb;
+  - Full ORM;
+  - Full API and crud opps;
+  - Error handling by try catch
+
+# Third party packages
+  - Mongoose, email-validator, dotenv, cookie-session  
+
