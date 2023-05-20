@@ -17,6 +17,10 @@
   - Full API and crud opps;
   - Error handling by try catch
 
+## Built in docs
+  - http
+  - stream  
+
 # Third party packages
   - Mongoose, email-validator, dotenv, cookie-session  
 
